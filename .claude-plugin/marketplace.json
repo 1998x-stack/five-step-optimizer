@@ -1,0 +1,15 @@
+{
+  "name": "five-step-optimizer-marketplace",
+  "owner": {
+    "name": "1998x-stack"
+  },
+  "plugins": [
+    {
+      "name": "five-step-optimizer",
+      "source": "./",
+      "description": "Question, delete, simplify, accelerate, automate—with verification gates",
+      "version": "0.2.0",
+      "category": "workflow"
+    }
+  ]
+}

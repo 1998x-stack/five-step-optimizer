@@ -1,0 +1,81 @@
+{
+  "case_id": "bug-flow-education-001",
+  "data_classification": "synthetic",
+  "sector": "software",
+  "title": "Fictional small bug fix process",
+  "scope": "low-risk non-security web issue",
+  "protected_constraints": [
+    "access controls",
+    "automated regression tests",
+    "security review for security-relevant changes"
+  ],
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "requirement": "weekly steering committee for low-risk bug fixes",
+      "owner": "product manager (fictional)",
+      "mandatory": false,
+      "decision": "challenge",
+      "source": "synthetic scenario"
+    }
+  ],
+  "baseline": {
+    "name": "Before",
+    "steps": [
+      {
+        "id": "triage",
+        "name": "Triage",
+        "cycle_seconds": 3600,
+        "machines": 1,
+        "availability": 0.8,
+        "yield": 1,
+        "variable_cost_per_attempt": 40
+      },
+      {
+        "id": "review",
+        "name": "Review",
+        "cycle_seconds": 7200,
+        "machines": 1,
+        "availability": 0.8,
+        "yield": 0.98,
+        "variable_cost_per_attempt": 50
+      }
+    ]
+  },
+  "proposed": {
+    "name": "After",
+    "steps": [
+      {
+        "id": "triage",
+        "name": "Async triage",
+        "cycle_seconds": 600,
+        "machines": 1,
+        "availability": 0.8,
+        "yield": 1,
+        "variable_cost_per_attempt": 10
+      },
+      {
+        "id": "review",
+        "name": "Risk-tiered review",
+        "cycle_seconds": 3600,
+        "machines": 1,
+        "availability": 0.8,
+        "yield": 0.99,
+        "variable_cost_per_attempt": 30
+      }
+    ]
+  },
+  "economics": {
+    "currency": "USD",
+    "annual_good_units": 1000,
+    "incremental_annual_fixed_cost": 2000,
+    "incremental_capex": 8000
+  },
+  "evidence": [
+    {
+      "claim": "all inputs",
+      "classification": "synthetic",
+      "source": "educational assumptions"
+    }
+  ]
+}

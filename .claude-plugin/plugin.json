@@ -1,0 +1,9 @@
+{
+  "name": "five-step-optimizer",
+  "description": "Evidence-first engineering optimization using the five-step algorithm",
+  "version": "0.2.0",
+  "license": "MIT",
+  "skills": [
+    "./skills/five-step-optimizer"
+  ]
+}

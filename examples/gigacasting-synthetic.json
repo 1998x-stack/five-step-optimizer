@@ -1,0 +1,117 @@
+{
+  "case_id": "gigacasting-education-001",
+  "data_classification": "synthetic",
+  "sector": "automotive",
+  "title": "Fictional stamp/weld vs integrated casting",
+  "scope": "one equivalent rear-underbody structural assembly, not the whole car",
+  "protected_constraints": [
+    "validated crash performance",
+    "mandatory dimensional inspection",
+    "machine guarding and interlocks",
+    "approved process qualification"
+  ],
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "requirement": "separate brackets must be produced",
+      "owner": "product engineering (fictional)",
+      "mandatory": false,
+      "decision": "challenge",
+      "source": "synthetic scenario"
+    },
+    {
+      "id": "REQ-2",
+      "requirement": "safety interlocks must remain active",
+      "owner": "EHS (fictional)",
+      "mandatory": true,
+      "decision": "retain",
+      "source": "synthetic scenario"
+    }
+  ],
+  "baseline": {
+    "name": "Stamping + logistics + joining + inspection (fictional)",
+    "steps": [
+      {
+        "id": "stamping",
+        "name": "Stamping",
+        "cycle_seconds": 50,
+        "machines": 1,
+        "availability": 0.85,
+        "yield": 0.99,
+        "variable_cost_per_attempt": 40
+      },
+      {
+        "id": "transport",
+        "name": "Parts handling",
+        "cycle_seconds": 12,
+        "machines": 1,
+        "availability": 0.95,
+        "yield": 0.998,
+        "variable_cost_per_attempt": 8
+      },
+      {
+        "id": "joining",
+        "name": "Joining cells",
+        "cycle_seconds": 90,
+        "machines": 1,
+        "availability": 0.9,
+        "yield": 0.98,
+        "variable_cost_per_attempt": 70
+      },
+      {
+        "id": "inspection",
+        "name": "Dimensional inspection",
+        "cycle_seconds": 60,
+        "machines": 1,
+        "availability": 0.9,
+        "yield": 0.995,
+        "variable_cost_per_attempt": 12
+      }
+    ]
+  },
+  "proposed": {
+    "name": "Integrated casting + finish + inspection (fictional)",
+    "steps": [
+      {
+        "id": "casting",
+        "name": "High pressure casting",
+        "cycle_seconds": 120,
+        "machines": 2,
+        "availability": 0.8,
+        "yield": 0.92,
+        "variable_cost_per_attempt": 75
+      },
+      {
+        "id": "finish",
+        "name": "Trim and machine",
+        "cycle_seconds": 55,
+        "machines": 1,
+        "availability": 0.85,
+        "yield": 0.99,
+        "variable_cost_per_attempt": 12
+      },
+      {
+        "id": "inspection",
+        "name": "NDT and geometry inspection",
+        "cycle_seconds": 90,
+        "machines": 1,
+        "availability": 0.9,
+        "yield": 0.98,
+        "variable_cost_per_attempt": 10
+      }
+    ]
+  },
+  "economics": {
+    "currency": "CNY",
+    "annual_good_units": 150000,
+    "incremental_annual_fixed_cost": 1300000,
+    "incremental_capex": 15000000
+  },
+  "evidence": [
+    {
+      "claim": "all cycle times, yields, capacities and costs",
+      "classification": "synthetic",
+      "source": "teaching assumptions, not Tesla factory records"
+    }
+  ]
+}

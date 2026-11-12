@@ -1,0 +1,39 @@
+name: CI — Validate and test optimizer
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  unit-and-examples:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Compile Python
+        run: python -m compileall -q scripts skills tests
+      - name: Run regression suite
+        run: python -m unittest discover -s tests -v
+      - name: Audit distribution
+        run: python scripts/quality_gate.py
+      - name: Validate and analyze synthetic cases
+        run: |
+          for case in examples/*-synthetic.json; do
+            python skills/five-step-optimizer/scripts/validate_case.py "$case"
+            python skills/five-step-optimizer/scripts/process_metrics.py "$case" --out "${RUNNER_TEMP}/$(basename "$case")"
+            python skills/five-step-optimizer/scripts/render_flow.py "$case" "${RUNNER_TEMP}/$(basename "$case" .json).svg"
+          done
+      - name: Install smoke test
+        run: |
+          python scripts/install_skill.py --target codex --base "${RUNNER_TEMP}/install-test"
+          test -f "${RUNNER_TEMP}/install-test/.codex/skills/five-step-optimizer/SKILL.md"
+          python scripts/install_skill.py --target codex --base "${RUNNER_TEMP}/install-test" --overwrite
