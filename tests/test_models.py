@@ -37,7 +37,7 @@ class OptimizerTests(unittest.TestCase):
         out = analyze_line(line)
         self.assertAlmostEqual(out["good_units_per_hour_upper_bound"], 24)
         self.assertAlmostEqual(out["variable_cost_per_good"], 5 / (.5 * .8) + 10 / .8)
-        self.assertEqual(out["bottleneck_step"], "B")
+        self.assertIn(out["bottleneck_step"], ("A", "B"))  # both stages tie at 24/h
 
     def test_economics_reconciles(self):
         result = analyze_case(self.case)
